@@ -1,0 +1,7 @@
+namespace BlogService.Features.Core
+{
+    public interface ILoggerProvider
+    {
+        ILogger CreateLogger(string name);
+    }
+}

@@ -1,15 +1,17 @@
+import { Author } from "../authors";
+import { Category } from "../categories";
+import { Tag } from "../tags";
+
 export class Article { 
+    public id: number;
+    public author: Author;
+    public authorId: string;
+    public title: string;
+    public slug: string;
+    public htmlContent: string;
+    public isPublished: boolean;
+    public published: string;
 
-    public id:any;
-    
-    public name:string;
-
-    public static fromJSON(data: { name:string }): Article {
-
-        let article = new Article();
-
-        article.name = data.name;
-
-        return article;
-    }
+    public categories: Array<Category> = [];
+    public tags: Array<Tag> = [];
 }

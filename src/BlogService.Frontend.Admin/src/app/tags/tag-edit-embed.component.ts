@@ -1,11 +1,11 @@
-import { Article } from "./article.model";
+import { Tag } from "./tag.model";
 import { EditorComponent } from "../shared";
-import {  ArticleDelete, ArticleEdit, ArticleAdd } from "./article.actions";
+import {  TagDelete, TagEdit, TagAdd } from "./tag.actions";
 
-const template = require("./article-edit-embed.component.html");
-const styles = require("./article-edit-embed.component.scss");
+const template = require("./tag-edit-embed.component.html");
+const styles = require("./tag-edit-embed.component.scss");
 
-export class ArticleEditEmbedComponent extends HTMLElement {
+export class TagEditEmbedComponent extends HTMLElement {
     constructor() {
         super();
         this.onSave = this.onSave.bind(this);
@@ -15,8 +15,8 @@ export class ArticleEditEmbedComponent extends HTMLElement {
 
     static get observedAttributes() {
         return [
-            "article",
-            "article-id"
+            "tag",
+            "tag-id"
         ];
     }
     
@@ -27,10 +27,10 @@ export class ArticleEditEmbedComponent extends HTMLElement {
     }
     
     private async _bind() {
-        this._titleElement.textContent = this.article ? "Edit Article": "Create Article";
+        this._titleElement.textContent = this.tag ? "Edit Tag": "Create Tag";
 
-        if (this.article) {                
-            this._nameInputElement.value = this.article.name;  
+        if (this.tag) {                
+            this._nameInputElement.value = this.tag.name;  
         } else {
             this._deleteButtonElement.style.display = "none";
         }     
@@ -49,48 +49,48 @@ export class ArticleEditEmbedComponent extends HTMLElement {
     }
 
     public onSave() {
-        const article = {
-            id: this.article != null ? this.article.id : null,
+        const tag = {
+            id: this.tag != null ? this.tag.id : null,
             name: this._nameInputElement.value
-        } as Article;
+        } as Tag;
         
-        this.dispatchEvent(new ArticleAdd(article));            
+        this.dispatchEvent(new TagAdd(tag));            
     }
 
     public onCreate() {        
-        this.dispatchEvent(new ArticleEdit(new Article()));            
+        this.dispatchEvent(new TagEdit(new Tag()));            
     }
 
     public onDelete() {        
-        const article = {
-            id: this.article != null ? this.article.id : null,
+        const tag = {
+            id: this.tag != null ? this.tag.id : null,
             name: this._nameInputElement.value
-        } as Article;
+        } as Tag;
 
-        this.dispatchEvent(new ArticleDelete(article));         
+        this.dispatchEvent(new TagDelete(tag));         
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
         switch (name) {
-            case "article-id":
-                this.articleId = newValue;
+            case "tag-id":
+                this.tagId = newValue;
                 break;
-            case "article":
-                this.article = JSON.parse(newValue);
+            case "tag":
+                this.tag = JSON.parse(newValue);
                 if (this.parentNode) {
-                    this.articleId = this.article.id;
-                    this._nameInputElement.value = this.article.name != undefined ? this.article.name : "";
-                    this._titleElement.textContent = this.articleId ? "Edit Article" : "Create Article";
+                    this.tagId = this.tag.id;
+                    this._nameInputElement.value = this.tag.name != undefined ? this.tag.name : "";
+                    this._titleElement.textContent = this.tagId ? "Edit Tag" : "Create Tag";
                 }
                 break;
         }           
     }
 
-    public articleId: any;
+    public tagId: any;
     
-	public article: Article;
+	public tag: Tag;
     
-    private get _createButtonElement(): HTMLElement { return this.querySelector(".article-create") as HTMLElement; }
+    private get _createButtonElement(): HTMLElement { return this.querySelector(".tag-create") as HTMLElement; }
     
 	private get _titleElement(): HTMLElement { return this.querySelector("h2") as HTMLElement; }
     
@@ -98,7 +98,7 @@ export class ArticleEditEmbedComponent extends HTMLElement {
     
 	private get _deleteButtonElement(): HTMLElement { return this.querySelector(".delete-button") as HTMLElement };
     
-	private get _nameInputElement(): HTMLInputElement { return this.querySelector(".article-name") as HTMLInputElement;}
+	private get _nameInputElement(): HTMLInputElement { return this.querySelector(".tag-name") as HTMLInputElement;}
 }
 
-customElements.define(`ce-article-edit-embed`,ArticleEditEmbedComponent);
+customElements.define(`ce-tag-edit-embed`,TagEditEmbedComponent);

@@ -7,7 +7,7 @@ export class ArticleService {
     private static _instance: ArticleService;
 
     public static get Instance() {
-        this._instance = this._instance || new ArticleService();
+        this._instance = this._instance || new this();
         return this._instance;
     }
 
@@ -23,6 +23,12 @@ export class ArticleService {
         });
     }
 
+    public getBySlug(slug): Promise<Article> {
+        return this._fetch({ url: `/api/article/getbyslug?slug=${slug}`, authRequired: true }).then((results: string) => {
+            return (JSON.parse(results) as { article: Article }).article;
+        });
+    }
+    
     public add(article) {
         return this._fetch({ url: `/api/article/add`, method: "POST", data: { article }, authRequired: true  });
     }
@@ -30,5 +36,4 @@ export class ArticleService {
     public remove(options: { id : number }) {
         return this._fetch({ url: `/api/article/remove?id=${options.id}`, method: "DELETE", authRequired: true  });
     }
-    
 }

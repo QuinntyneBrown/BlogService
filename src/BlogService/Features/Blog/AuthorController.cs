@@ -15,7 +15,6 @@ namespace BlogService.Features.Blog
 
         public AuthorController(IMediator mediator, IUserManager userManager)
         {
-            var context = Request.GetOwinContext();
             _mediator = mediator;
             _userManager = userManager;
         }

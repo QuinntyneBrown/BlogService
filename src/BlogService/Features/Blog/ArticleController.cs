@@ -59,6 +59,7 @@ namespace BlogService.Features.Blog
 
         [Route("getBySlug")]
         [HttpGet]
+        [AllowAnonymous]
         [ResponseType(typeof(GetArticleBySlugResponse))]
         public async Task<IHttpActionResult> GetBySlug([FromUri]GetArticleBySlugRequest request)
             => Ok(await _mediator.Send(request));

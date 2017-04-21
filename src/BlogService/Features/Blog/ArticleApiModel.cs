@@ -18,20 +18,31 @@ namespace BlogService.Features.Blog
         public DateTime? Published { get; set; }
         public AuthorApiModel Author { get; set; }
         public ICollection<TagApiModel> Tags { get; set; } = new HashSet<TagApiModel>();
-        public ICollection<CategoryApiModel> MyProperty { get; set; }
+        public ICollection<CategoryApiModel> Categories { get; set; }
 
         public static TModel FromArticle<TModel>(Article article) where
             TModel : ArticleApiModel, new()
         {
             var model = new TModel();
+
             model.Id = article.Id;
+
             model.AuthorId = article.AuthorId;
+
             model.Slug = article.Slug;
+
             model.Title = article.Title;
+
             model.HtmlContent = article.HtmlContent;
+
             model.Published = article.Published;
+
             model.Author = AuthorApiModel.FromAuthor(article.Author);
+
             model.Tags = article.Tags.Select(t => TagApiModel.FromTag(t)).ToList();
+
+            model.Categories = article.Categories.Select(c => CategoryApiModel.FromCategory(c)).ToList();
+
             return model;
         }
 

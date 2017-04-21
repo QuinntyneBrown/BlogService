@@ -1,9 +1,9 @@
-using MediatR;
 using BlogService.Data;
+using BlogService.Data.Model;
 using BlogService.Features.Core;
+using MediatR;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using BlogService.Data.Model;
 
 namespace BlogService.Features.Blog
 {

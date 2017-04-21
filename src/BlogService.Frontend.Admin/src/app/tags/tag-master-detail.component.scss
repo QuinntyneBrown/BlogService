@@ -1,11 +1,11 @@
 @import "../../styles/base/_all";
 
-ce-article-master-detail {
+ce-tag-master-detail {
     display:block;
 	@extend .view-card;
 
-    ce-article-edit-embed,
-    ce-article-list-embed {
+    ce-tag-edit-embed,
+    ce-tag-list-embed {
         float:left;
         display:inline-block;
         position:relative;
@@ -13,7 +13,7 @@ ce-article-master-detail {
     }
 }
 
-ce-article-master-detail::after {
+ce-tag-master-detail::after {
     clear:both;
     display:block;
     content:" ";

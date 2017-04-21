@@ -7,8 +7,8 @@
     <ProjectGuid>{A8711BC3-F343-4E44-B045-349942559795}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VideoService</RootNamespace>
-    <AssemblyName>VideoService</AssemblyName>
+    <RootNamespace>BlogService</RootNamespace>
+    <AssemblyName>BlogService</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -230,6 +230,26 @@
     <Compile Include="Data\Model\ILoggable.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Data\Model\Tag.cs" />
+    <Compile Include="Features\Blog\AddOrUpdateArticleCommand.cs" />
+    <Compile Include="Features\Blog\AddOrUpdateAuthorCommand.cs" />
+    <Compile Include="Features\Blog\ArticleApiModel.cs" />
+    <Compile Include="Features\Blog\ArticleController.cs" />
+    <Compile Include="Features\Blog\ArticleSlugExistsException.cs" />
+    <Compile Include="Features\Blog\AuthorApiModel.cs" />
+    <Compile Include="Features\Blog\AuthorController.cs" />
+    <Compile Include="Features\Blog\GetArticleByIdQuery.cs" />
+    <Compile Include="Features\Blog\GetArticleBySlugQuery.cs" />
+    <Compile Include="Features\Blog\GetArticlesQuery.cs" />
+    <Compile Include="Features\Blog\GetAuthorByIdQuery.cs" />
+    <Compile Include="Features\Blog\GetAuthorsQuery.cs" />
+    <Compile Include="Features\Blog\RemoveArticleCommand.cs" />
+    <Compile Include="Features\Blog\RemoveAuthorCommand.cs" />
+    <Compile Include="Features\Categories\AddOrUpdateCategoryCommand.cs" />
+    <Compile Include="Features\Categories\CategoryApiModel.cs" />
+    <Compile Include="Features\Categories\CategoryController.cs" />
+    <Compile Include="Features\Categories\GetCategoriesQuery.cs" />
+    <Compile Include="Features\Categories\GetCategoryByIdQuery.cs" />
+    <Compile Include="Features\Categories\RemoveCategoryCommand.cs" />
     <Compile Include="Features\Core\Cache.cs" />
     <Compile Include="Features\Core\CacheProvider.cs" />
     <Compile Include="Features\Core\DateExtensions.cs" />
@@ -265,6 +285,12 @@
     <Compile Include="Features\DigitalAssets\UploadHandlers\StreamHelper.cs" />
     <Compile Include="Features\Notifications\NotificationsConfiguration.cs" />
     <Compile Include="Features\Notifications\NotificationService.cs" />
+    <Compile Include="Features\Tags\AddOrUpdateTagCommand.cs" />
+    <Compile Include="Features\Tags\GetTagByIdQuery.cs" />
+    <Compile Include="Features\Tags\GetTagsQuery.cs" />
+    <Compile Include="Features\Tags\RemoveTagCommand.cs" />
+    <Compile Include="Features\Tags\TagApiModel.cs" />
+    <Compile Include="Features\Tags\TagController.cs" />
     <Compile Include="Features\Users\AddOrUpdateUserCommand.cs" />
     <Compile Include="Features\Users\Constants.cs" />
     <Compile Include="Features\Users\GetUserByIdQuery.cs" />

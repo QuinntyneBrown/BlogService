@@ -230,20 +230,19 @@
     <Compile Include="Data\Model\ILoggable.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Data\Model\Tag.cs" />
-    <Compile Include="Features\Blog\AddOrUpdateArticleCommand.cs" />
-    <Compile Include="Features\Blog\AddOrUpdateAuthorCommand.cs" />
-    <Compile Include="Features\Blog\ArticleApiModel.cs" />
-    <Compile Include="Features\Blog\ArticleController.cs" />
-    <Compile Include="Features\Blog\ArticleSlugExistsException.cs" />
-    <Compile Include="Features\Blog\AuthorApiModel.cs" />
-    <Compile Include="Features\Blog\AuthorController.cs" />
-    <Compile Include="Features\Blog\GetArticleByIdQuery.cs" />
-    <Compile Include="Features\Blog\GetArticleBySlugQuery.cs" />
-    <Compile Include="Features\Blog\GetArticlesQuery.cs" />
-    <Compile Include="Features\Blog\GetAuthorByIdQuery.cs" />
-    <Compile Include="Features\Blog\GetAuthorsQuery.cs" />
-    <Compile Include="Features\Blog\RemoveArticleCommand.cs" />
-    <Compile Include="Features\Blog\RemoveAuthorCommand.cs" />
+    <Compile Include="Features\Articles\AddOrUpdateArticleCommand.cs" />
+    <Compile Include="Features\Authors\AddOrUpdateAuthorCommand.cs" />
+    <Compile Include="Features\Articles\ArticleApiModel.cs" />
+    <Compile Include="Features\Articles\ArticleSlugExistsException.cs" />
+    <Compile Include="Features\Authors\AuthorApiModel.cs" />
+    <Compile Include="Features\Authors\AuthorController.cs" />
+    <Compile Include="Features\Articles\GetArticleByIdQuery.cs" />
+    <Compile Include="Features\Articles\GetArticleBySlugQuery.cs" />
+    <Compile Include="Features\Articles\GetArticlesQuery.cs" />
+    <Compile Include="Features\Authors\GetAuthorByIdQuery.cs" />
+    <Compile Include="Features\Authors\GetAuthorsQuery.cs" />
+    <Compile Include="Features\Articles\RemoveArticleCommand.cs" />
+    <Compile Include="Features\Authors\RemoveAuthorCommand.cs" />
     <Compile Include="Features\Categories\AddOrUpdateCategoryCommand.cs" />
     <Compile Include="Features\Categories\CategoryApiModel.cs" />
     <Compile Include="Features\Categories\CategoryController.cs" />
@@ -334,6 +333,8 @@
     <Compile Include="Features\Accounts\ProfileController.cs" />
     <Compile Include="Features\Notifications\SendRegistrationConfirmationCommand.cs" />
     <Compile Include="Features\Accounts\RegisterAccountApiModel.cs" />
+    <Compile Include="Features\Articles\ArticleController.cs" />
+    <Compile Include="Features\Articles\GetLatestArticlesPageQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

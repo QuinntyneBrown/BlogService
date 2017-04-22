@@ -1,6 +1,8 @@
 <div class="container">
     <div class="header-left">
         <h1>Blog Service</h1>
+        <ce-link routesegments='[""]' class="articles" route-name="article-list" auth-required>articles</ce-link>
+        <ce-link routesegments='["author","list"]' class="authors" route-name="author-list" auth-required>authors</ce-link>
     </div>
     <div class="header-right">
         <ce-link routesegments='["login"]' class="logout" auth-required>logout</ce-link>

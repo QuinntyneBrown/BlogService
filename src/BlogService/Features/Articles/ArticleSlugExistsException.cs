@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Articles
 {
     public class ArticleSlugExistsException: Exception
     {

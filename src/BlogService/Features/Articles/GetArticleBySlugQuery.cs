@@ -1,16 +1,18 @@
-using MediatR;
 using BlogService.Data;
 using BlogService.Features.Core;
+using MediatR;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Articles
 {
     public class GetArticleBySlugQuery
     {
         public class GetArticleBySlugRequest : IRequest<GetArticleBySlugResponse>
         {
             public string Slug { get; set; }
+            public Guid TenantUniqueId { get; set; }
         }
 
         public class GetArticleBySlugResponse
@@ -30,7 +32,10 @@ namespace BlogService.Features.Blog
             {
                 return new GetArticleBySlugResponse()
                 {
-                    Article = ArticleApiModel.FromArticle(await _context.Articles.SingleAsync(a => a.Slug == request.Slug))
+                    Article = ArticleApiModel.FromArticle(await _context.Articles
+                    .Include(x => x.Tenant)
+                    .Include(x => x.Tags)
+                    .SingleAsync(a => a.Slug == request.Slug && a.Tenant.UniqueId == request.TenantUniqueId ))
                 };
             }
 

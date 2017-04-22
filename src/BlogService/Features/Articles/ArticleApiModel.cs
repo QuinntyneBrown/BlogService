@@ -1,23 +1,35 @@
 using BlogService.Data.Model;
+using BlogService.Features.Authors;
 using BlogService.Features.Categories;
 using BlogService.Features.Tags;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Articles
 {
     public class ArticleApiModel
     {        
         public int Id { get; set; }
+
         public int? AuthorId { get; set; }
+
         public string Slug { get; set; }
+
+        public string FeaturedImageUrl { get; set; }
+
         public string Title { get; set; }
+
         public string HtmlContent { get; set; }
+
         public bool IsPublished { get; set; }
+
         public DateTime? Published { get; set; }
+
         public AuthorApiModel Author { get; set; }
+
         public ICollection<TagApiModel> Tags { get; set; } = new HashSet<TagApiModel>();
+
         public ICollection<CategoryApiModel> Categories { get; set; }
 
         public static TModel FromArticle<TModel>(Article article) where
@@ -30,6 +42,8 @@ namespace BlogService.Features.Blog
             model.AuthorId = article.AuthorId;
 
             model.Slug = article.Slug;
+
+            model.FeaturedImageUrl = article.FeaturedImageUrl;
 
             model.Title = article.Title;
 

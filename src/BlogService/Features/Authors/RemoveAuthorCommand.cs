@@ -1,15 +1,18 @@
-using MediatR;
 using BlogService.Data;
 using BlogService.Features.Core;
+using MediatR;
+using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Authors
 {
     public class RemoveAuthorCommand
     {
         public class RemoveAuthorRequest : IRequest<RemoveAuthorResponse>
         {
             public int Id { get; set; }
+            public Guid TenantUniqueId { get; set; }
         }
 
         public class RemoveAuthorResponse { }
@@ -24,7 +27,9 @@ namespace BlogService.Features.Blog
 
             public async Task<RemoveAuthorResponse> Handle(RemoveAuthorRequest request)
             {
-                var author = await _context.Authors.FindAsync(request.Id);
+                var author = await _context.Authors
+                    .Include(x => x.Tenant)
+                    .SingleAsync(x => x.Id == request.Id && x.Tenant.UniqueId == request.TenantUniqueId);
                 author.IsDeleted = true;
                 await _context.SaveChangesAsync();
                 return new RemoveAuthorResponse();

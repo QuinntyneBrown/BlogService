@@ -1,16 +1,21 @@
-using MediatR;
 using BlogService.Data;
 using BlogService.Features.Core;
+using MediatR;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Data.Entity;
+using System;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Articles
 {
     public class GetArticlesQuery
     {
-        public class GetArticlesRequest : IRequest<GetArticlesResponse> { }
+        public class GetArticlesRequest : IRequest<GetArticlesResponse> {
+            public Guid TenantUniqueId { get; set; }
+            public int? Skip { get; set; }
+            public int? Take { get; set; }
+        }
 
         public class GetArticlesResponse
         {
@@ -28,12 +33,17 @@ namespace BlogService.Features.Blog
             public async Task<GetArticlesResponse> Handle(GetArticlesRequest request)
             {
                 var articles = await _context.Articles
-                    .Include(x=>x.Author)
+                    .Include(x => x.Author)
+                    .Include(x => x.Tenant)
                     .ToListAsync();
 
                 return new GetArticlesResponse()
                 {
-                    Articles = articles.Select(x => ArticleApiModel.FromArticle(x)).ToList()
+                    Articles = articles
+                    .Where(x => 
+                    x.Tenant != null &&
+                    x.Tenant.UniqueId == request.TenantUniqueId)
+                    .Select(x => ArticleApiModel.FromArticle(x)).ToList()
                 };
             }
 

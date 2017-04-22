@@ -1,18 +1,17 @@
-using MediatR;
 using BlogService.Data;
 using BlogService.Features.Core;
-using System.Collections.Generic;
+using MediatR;
+using System;
 using System.Threading.Tasks;
-using System.Linq;
-using System.Data.Entity;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Authors
 {
     public class GetAuthorByIdQuery
     {
         public class GetAuthorByIdRequest : IRequest<GetAuthorByIdResponse> { 
 			public int Id { get; set; }
-		}
+            public Guid TenantUniqueId { get; set; }
+        }
 
         public class GetAuthorByIdResponse
         {

@@ -1,6 +1,6 @@
 using BlogService.Data.Model;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Authors
 {
     public class AuthorApiModel
     {        

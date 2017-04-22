@@ -1,16 +1,19 @@
-using MediatR;
 using BlogService.Data;
 using BlogService.Features.Core;
+using MediatR;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Data.Entity;
+using System;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Authors
 {
     public class GetAuthorsQuery
     {
-        public class GetAuthorsRequest : IRequest<GetAuthorsResponse> { }
+        public class GetAuthorsRequest : IRequest<GetAuthorsResponse> {
+            public Guid TenantUniqueId { get; set; }
+        }
 
         public class GetAuthorsResponse
         {
@@ -27,7 +30,11 @@ namespace BlogService.Features.Blog
 
             public async Task<GetAuthorsResponse> Handle(GetAuthorsRequest request)
             {
-                var authors = await _context.Authors.ToListAsync();
+                var authors = await _context.Authors
+                    .Include(x=>x.Tenant)
+                    .Where(x =>x.Tenant.UniqueId == request.TenantUniqueId)                    
+                    .ToListAsync();
+
                 return new GetAuthorsResponse()
                 {
                     Authors = authors.Select(x => AuthorApiModel.FromAuthor(x)).ToList()

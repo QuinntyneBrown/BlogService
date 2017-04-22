@@ -17,16 +17,17 @@ namespace BlogService.Data.Model
         [ForeignKey("Author")]
         public int? AuthorId { get; set; }
 
-        [Index("TitleIndex", IsUnique = false)]
+        [Index("ArticleTitleIndex", IsUnique = false)]
         [Column(TypeName = "VARCHAR")]
         [StringLength(255)]
-
         public string Title { get; set; }
 
-        [Index("SlugIndex", IsUnique = false)]
+        [Index("ArticleSlugIndex", IsUnique = false)]
         [Column(TypeName = "VARCHAR")]
         [StringLength(255)]
         public string Slug { get; set; }
+
+        public string FeaturedImageUrl { get; set; }
 
         public string HtmlContent { get; set; }
 

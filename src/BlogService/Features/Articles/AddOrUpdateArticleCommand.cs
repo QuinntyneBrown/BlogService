@@ -4,14 +4,16 @@ using BlogService.Features.Core;
 using MediatR;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System;
 
-namespace BlogService.Features.Blog
+namespace BlogService.Features.Articles
 {
     public class AddOrUpdateArticleCommand
     {
         public class AddOrUpdateArticleRequest : IRequest<AddOrUpdateArticleResponse>
         {
             public ArticleApiModel Article { get; set; }
+            public Guid TenantUniqueId { get; set; }
         }
 
         public class AddOrUpdateArticleResponse { }
@@ -27,10 +29,15 @@ namespace BlogService.Features.Blog
             public async Task<AddOrUpdateArticleResponse> Handle(AddOrUpdateArticleRequest request)
             {
                 var entity = await _context.Articles
-                    .Include(x=>x.Tags)
+                    .Include(x => x.Tags)
+                    .Include(x => x.Tenant)
                     .FirstOrDefaultAsync(x => x.Id == request.Article.Id);
-                                
-                if (entity == null) _context.Articles.Add(entity = new Article());
+
+                if (entity == null)
+                {
+                    var tenant = await _context.Tenants.SingleAsync(x => x.UniqueId == request.TenantUniqueId);
+                    _context.Articles.Add(entity = new Article() { TenantId = tenant.Id });
+                }
 
                 if (await ArticleSlugExists(request.Article.Title.GenerateSlug(),request.Article.Id))
                     throw new ArticleSlugExistsException();
@@ -43,10 +50,17 @@ namespace BlogService.Features.Blog
                 }
 
                 entity.AuthorId = request.Article.AuthorId;
+
                 entity.Title = request.Article.Title;
+
                 entity.HtmlContent = request.Article.HtmlContent;
+
+                entity.FeaturedImageUrl = request.Article.FeaturedImageUrl;
+
                 entity.Slug = request.Article.Title.GenerateSlug();
+
                 entity.IsPublished = request.Article.IsPublished;
+
                 entity.Published = request.Article.Published;
                 
                 await _context.SaveChangesAsync();

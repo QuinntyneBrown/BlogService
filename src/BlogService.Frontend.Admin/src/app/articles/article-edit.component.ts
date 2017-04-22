@@ -35,6 +35,8 @@ export class ArticleEditComponent extends HTMLElement {
         this.titleElement.textContent = "Create Article";
         this.htmlContentEditor = new EditorComponent(this.htmlContentElement);
 
+        rome(this.articlePublishedElement);
+
         let promises: Array<any> = [this._authorService.get(), this._tagService.get()];
 
         if (this.articleId) {
@@ -55,8 +57,9 @@ export class ArticleEditComponent extends HTMLElement {
         if (this.articleId) {            
             const article: Article = results[2];
             this.articleTitleInputElement.value = article.title;
+            this.featuredImageUrlElement.value = article.featuredImageUrl;
             this.htmlContentEditor.setHTML(article.htmlContent); 
-            this.published = article.published;
+            this.articlePublishedElement.value = article.published;
             this.titleElement.textContent = "Edit Article";
         } else {
             this.deleteButtonElement.style.display = "none";
@@ -73,9 +76,10 @@ export class ArticleEditComponent extends HTMLElement {
             id: this.articleId,
             authorId: this.selectElement.value,
             title: this.articleTitleInputElement.value,
+            featuredImageUrl: this.featuredImageUrlElement.value,
             htmlContent: this.htmlContentEditor.text,
             isPublished: true,
-            published: this.published
+            published: this.articlePublishedElement.value
         } as Article;
         
         await this._articleService.add(article);
@@ -96,14 +100,27 @@ export class ArticleEditComponent extends HTMLElement {
     }
 
     public articleId: number;
+
     public published: string;
+
     public htmlContentEditor: EditorComponent;
+
     public get titleElement(): HTMLElement { return this.querySelector("h2") as HTMLInputElement; }
+
+    public get featuredImageUrlElement(): HTMLInputElement { return this.querySelector(".article-featured-image-url") as HTMLInputElement; }
+
     public get htmlContentElement(): HTMLElement { return this.querySelector(".article-html-content") as HTMLElement; }
+
     public get saveButtonElement(): HTMLButtonElement { return this.querySelector(".save-button") as HTMLButtonElement; };
+
     public get deleteButtonElement(): HTMLButtonElement { return this.querySelector(".delete-button") as HTMLButtonElement; };
+
     public get articleTitleInputElement(): HTMLInputElement { return this.querySelector(".article-title") as HTMLInputElement; }
+
+    public get articlePublishedElement(): HTMLInputElement { return this.querySelector(".article-published") as HTMLInputElement; }
+
     public get selectElement(): HTMLSelectElement { return this.querySelector("select") as HTMLSelectElement; }
+
     public get isPublishedElement(): HTMLInputElement { return this.querySelector(".article-is-published") as HTMLInputElement; }
 }
 

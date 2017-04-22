@@ -73,9 +73,13 @@ namespace BlogService.Features.DigitalAssets
             }
 
             private readonly BlogServiceContext _context;
+
             private readonly ICache _cache;
+
             private readonly CloudStorageAccount _storageAccount;
+
             private CloudBlobClient _blobClient;
+
             private readonly IAzureBlobStorageConfiguration _configuration;
         }
     }

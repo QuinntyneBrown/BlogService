@@ -36,8 +36,9 @@ namespace BlogService.Features.Articles
                 var articles = await _context.Articles
                     .Include(x => x.Author)
                     .Include(x => x.Tenant)
-                    .Where(x => x.Tenant != null 
-                    && x.Tenant.UniqueId == request.TenantUniqueId)
+                    .Include(x => x.Tags)
+                    .Include(x => x.Categories)
+                    .Where(x => x.Tenant != null && x.Tenant.UniqueId == request.TenantUniqueId)
                     .OrderByDescending(x => x.Published)
                     .Skip(request.Skip)
                     .Take(request.Take)

@@ -195,10 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="azureBlobStorageConfiguration.config">
-      <DependentUpon>Web.config</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="dist\app.js" />
     <Content Include="index.html" />
     <Content Include="lib\moment.min.js" />

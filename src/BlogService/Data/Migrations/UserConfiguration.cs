@@ -15,6 +15,8 @@ namespace BlogService.Migrations
             var roles = new List<Role>();
             var tenant = context.Tenants.Single(x => x.Name == "Default");
 
+            var mddTenant = context.Tenants.Single(x => x.Name == "Metrics Driven Development");
+            
             roles.Add(systemRole);
 
             context.Users.AddOrUpdate(x => x.Username, new User()
@@ -24,7 +26,15 @@ namespace BlogService.Migrations
                 Roles = roles,
                 TenantId = tenant.Id
             });
-                        
+
+            context.Users.AddOrUpdate(x => x.Username, new User()
+            {
+                Username = "quinntyne.brown@corusent.com",
+                Password = new EncryptionService().TransformPassword("system"),
+                Roles = roles,
+                TenantId = mddTenant.Id
+            });
+
             context.SaveChanges();
         }
     }

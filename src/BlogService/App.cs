@@ -50,11 +50,12 @@ namespace BlogService
 
             config.Filters.Add(new AuthorizeAttribute());
 
-            var jSettings = new JsonSerializerSettings();
-            jSettings.Formatting = Formatting.Indented;
-            jSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            jSettings.ContractResolver = new SignalRContractResolver();
-            config.Formatters.JsonFormatter.SerializerSettings = jSettings;
+            var jsonSerializerSettings = new JsonSerializerSettings();
+            jsonSerializerSettings.Formatting = Formatting.Indented;
+            jsonSerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            jsonSerializerSettings.ContractResolver = new SignalRContractResolver();
+            jsonSerializerSettings.StringEscapeHandling = StringEscapeHandling.EscapeHtml;
+            config.Formatters.JsonFormatter.SerializerSettings = jsonSerializerSettings;
 
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 

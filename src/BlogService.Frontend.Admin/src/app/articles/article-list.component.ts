@@ -14,7 +14,10 @@ export class ArticleListComponent extends HTMLElement {
         this.innerHTML = `<style>${styles}</style> ${template}`;
         const articles: Array<Article> = await this._articleService.get();
         for (var i = 0; i < articles.length; i++) {
-            this.appendChild(createElement(`<ce-article-item entity='${JSON.stringify(articles[i])}'></ce-article-item>`));
+            var el = document.createElement("ce-article-item") as any;
+            el.entity = articles[i];
+            this.appendChild(el);
+            //this.appendChild(createElement(`<ce-article-item entity='${JSON.stringify(articles[i])}'></ce-article-item>`));
         }
     }
 }

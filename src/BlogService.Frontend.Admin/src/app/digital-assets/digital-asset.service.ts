@@ -14,7 +14,7 @@ export class DigitalAssetService {
         return fetch({ url: "/api/digitalasset/get" });
     }
 
-    public upload(options: {data: FormData}) {
+    public upload(options: { data: FormData }) {
         return fetch({
             url: "/api/digitalasset/upload",
             method: "POST",

@@ -12,7 +12,7 @@ export class ArticleService {
     }
 
     public get(): Promise<Array<Article>> {
-        return this._fetch({ url: "/api/article/get", authRequired: true }).then((results:string) => {
+        return this._fetch({ url: "/api/article/get", authRequired: true }).then((results:string) => {            
             return (JSON.parse(results) as { articles: Array<Article> }).articles;
         });
     }

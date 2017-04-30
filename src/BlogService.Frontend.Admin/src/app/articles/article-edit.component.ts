@@ -17,7 +17,7 @@ export class ArticleEditComponent extends HTMLElement {
         private _router: Router = Router.Instance
     ) {
         super();
-        this.onSave = this.onSave.bind(this);
+        this.saveArticle = this.saveArticle.bind(this);
         this.onDelete = this.onDelete.bind(this);
     }
 
@@ -55,11 +55,14 @@ export class ArticleEditComponent extends HTMLElement {
         }
 
         if (this.articleId) {            
-            const article: Article = results[2];
+            const article: Article = results[2];           
+            this.isPublishedElement.checked = article.isPublished;
             this.articleTitleInputElement.value = article.title;
             this.featuredImageUrlElement.value = article.featuredImageUrl;
             this.htmlContentEditor.setHTML(article.htmlContent); 
             this.articlePublishedElement.value = article.published;
+            
+            
             this.titleElement.textContent = "Edit Article";
         } else {
             this.deleteButtonElement.style.display = "none";
@@ -67,18 +70,19 @@ export class ArticleEditComponent extends HTMLElement {
     }
 
     private _setEventListeners() {
-        this.saveButtonElement.addEventListener("click", this.onSave);
+        this.saveButtonElement.addEventListener("click", this.saveArticle);
         this.deleteButtonElement.addEventListener("click", this.onDelete);
     }
 
-    public async onSave() {
+    public async saveArticle() {
+        
         const article = {
             id: this.articleId,
             authorId: this.selectElement.value,
             title: this.articleTitleInputElement.value,
             featuredImageUrl: this.featuredImageUrlElement.value,
             htmlContent: this.htmlContentEditor.text,
-            isPublished: true,
+            isPublished: this.isPublishedCheckedElement != null,
             published: this.articlePublishedElement.value
         } as Article;
         
@@ -120,6 +124,8 @@ export class ArticleEditComponent extends HTMLElement {
     public get articlePublishedElement(): HTMLInputElement { return this.querySelector(".article-published") as HTMLInputElement; }
 
     public get selectElement(): HTMLSelectElement { return this.querySelector("select") as HTMLSelectElement; }
+    
+    public get isPublishedCheckedElement(): HTMLInputElement { return this.querySelector(".article-is-published:checked") as HTMLInputElement; }
 
     public get isPublishedElement(): HTMLInputElement { return this.querySelector(".article-is-published") as HTMLInputElement; }
 }

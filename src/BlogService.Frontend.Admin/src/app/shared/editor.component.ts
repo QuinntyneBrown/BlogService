@@ -3,7 +3,7 @@ export class EditorComponent {
         this._quill = new Quill(nativeElement, {
             modules: {
                 toolbar: [
-                    [{ header: [1, 2, false] }],
+                    [{ header: [1, 2, 3, 4, false] }],
                     ['bold', 'italic', 'underline'],
                     ['link']
                 ]

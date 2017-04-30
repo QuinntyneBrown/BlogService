@@ -27,6 +27,8 @@ namespace BlogService.Data.Model
         [StringLength(255)]
         public string Slug { get; set; }
 
+        public string Description { get; set; }
+
         public string FeaturedImageUrl { get; set; }
 
         public string HtmlContent { get; set; }

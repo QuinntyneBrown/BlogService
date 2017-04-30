@@ -23,6 +23,18 @@ namespace BlogService.Features.Articles
 
         public string HtmlContent { get; set; }
 
+        public string Description {
+            get {
+                if (String.IsNullOrEmpty(HtmlContent)) return "";
+                HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(HtmlContent);
+                var value = HttpUtility.HtmlDecode(doc.DocumentNode.InnerText);
+                if (value.Length > 160)
+                    value = value.Substring(0, 160);
+                return value;
+            }
+        }
+        
         public bool IsPublished { get; set; }
 
         public DateTime? Published { get; set; }
@@ -32,6 +44,7 @@ namespace BlogService.Features.Articles
         public ICollection<TagApiModel> Tags { get; set; } = new HashSet<TagApiModel>();
 
         public ICollection<CategoryApiModel> Categories { get; set; }
+        
 
         public static TModel FromArticle<TModel>(Article article) where
             TModel : ArticleApiModel, new()
@@ -47,10 +60,12 @@ namespace BlogService.Features.Articles
             model.FeaturedImageUrl = article.FeaturedImageUrl;
 
             model.Title = article.Title;
-
+            
             model.HtmlContent = article.HtmlContent;
 
             model.Published = article.Published;
+
+            model.IsPublished = article.IsPublished;
 
             model.Author = AuthorApiModel.FromAuthor(article.Author);
 

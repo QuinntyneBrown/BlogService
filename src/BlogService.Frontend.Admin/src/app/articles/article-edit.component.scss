@@ -26,13 +26,22 @@ ce-article-edit {
     }
 
     .article-html-content {
-        height:145px;
+        height:400px;
         margin-bottom:20px;        
     }
 
-    .article-title {
+    .article-title,
+    .article-featured-image-url,
+    .article-featured-image-url input {
         width:100%;
         max-width: calc(100% - 10px);
+    }
+
+    .article-description {
+        height:150px;
+        width:100%;
+        max-width: calc(100% - 10px);
+        margin-bottom:15px;
     }
 
     input[type="checkbox"] {

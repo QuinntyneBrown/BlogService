@@ -55,6 +55,8 @@ namespace BlogService.Features.Articles
 
                 entity.HtmlContent = request.Article.HtmlContent;
 
+                entity.Description = request.Article.Description;
+
                 entity.FeaturedImageUrl = request.Article.FeaturedImageUrl;
 
                 entity.Slug = request.Article.Title.GenerateSlug();

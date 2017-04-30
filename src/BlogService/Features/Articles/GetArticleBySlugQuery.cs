@@ -35,6 +35,7 @@ namespace BlogService.Features.Articles
                     Article = ArticleApiModel.FromArticle(await _context.Articles
                     .Include(x => x.Tenant)
                     .Include(x => x.Tags)
+                    .Include(x => x.Author)
                     .SingleAsync(a => a.Slug == request.Slug && a.Tenant.UniqueId == request.TenantUniqueId ))
                 };
             }

@@ -13,7 +13,7 @@ export class AccountService {
 
     public get(): Promise<Array<Account>> {
         return this._fetch({ url: "/api/account/get", authRequired: true }).then((results:string) => {
-            return (JSON.parse(results) as { accounts: Array<Account> }).accounts;
+            return (JSON.parse(results) as { accounts: Array<Account> }).accounts;            
         });
     }
 

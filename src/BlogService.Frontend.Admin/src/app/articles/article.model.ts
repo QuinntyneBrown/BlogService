@@ -13,6 +13,8 @@ export class Article {
 
     public slug: string;
 
+    public description: string;
+
     public featuredImageUrl: string;
 
     public htmlContent: string;

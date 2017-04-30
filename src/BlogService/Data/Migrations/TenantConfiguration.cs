@@ -17,7 +17,7 @@ namespace BlogService.Migrations
 
             context.Tenants.AddOrUpdate(x => x.Name, new Tenant()
             {
-                Name = "Metrics Driven Development",
+                Name = "Architecture Notes",
                 UniqueId = new Guid("4204672e-f64a-4edb-8e5c-01c79b7bcb70")
             });
 

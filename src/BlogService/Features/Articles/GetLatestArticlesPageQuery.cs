@@ -38,7 +38,7 @@ namespace BlogService.Features.Articles
                     .Include(x => x.Tenant)
                     .Include(x => x.Tags)
                     .Include(x => x.Categories)
-                    .Where(x => x.Tenant != null && x.Tenant.UniqueId == request.TenantUniqueId)
+                    .Where(x => x.Tenant != null && x.Tenant.UniqueId == request.TenantUniqueId && x.IsPublished)
                     .OrderByDescending(x => x.Published)
                     .Skip(request.Skip)
                     .Take(request.Take)

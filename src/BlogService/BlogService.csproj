@@ -339,6 +339,7 @@
     <Compile Include="Features\Accounts\RegisterAccountApiModel.cs" />
     <Compile Include="Features\Articles\ArticleController.cs" />
     <Compile Include="Features\Articles\GetLatestArticlesPageQuery.cs" />
+    <Compile Include="Features\Articles\GetPreviewArticleBySlugQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

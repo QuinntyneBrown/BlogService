@@ -8,6 +8,7 @@ using static BlogService.Features.Articles.GetArticlesQuery;
 using static BlogService.Features.Articles.GetArticleByIdQuery;
 using static BlogService.Features.Articles.RemoveArticleCommand;
 using static BlogService.Features.Articles.GetArticleBySlugQuery;
+using static BlogService.Features.Articles.GetPreviewArticleBySlugQuery;
 using static BlogService.Features.Articles.GetLatestArticlesPageQuery;
 
 namespace BlogService.Features.Articles
@@ -44,6 +45,16 @@ namespace BlogService.Features.Articles
         [AllowAnonymous]
         [ResponseType(typeof(GetArticleBySlugResponse))]
         public async Task<IHttpActionResult> GetBySlug([FromUri]GetArticleBySlugRequest request)
+        {
+            request.TenantUniqueId = Request.GetTenantUniqueId();
+            return Ok(await _mediator.Send(request));
+        }
+
+        [Route("preview")]
+        [HttpGet]
+        [AllowAnonymous]
+        [ResponseType(typeof(GetPreviewArticleBySlugResponse))]
+        public async Task<IHttpActionResult> GetBySlug([FromUri]GetPreviewArticleBySlugRequest request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));

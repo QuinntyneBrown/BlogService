@@ -16,7 +16,7 @@ namespace BlogService.Data
         DbSet<DigitalAsset> DigitalAssets { get; set; }        
         DbSet<Account> Accounts { get; set; }
         DbSet<Profile> Profiles { get; set; }
-
+        DbSet<Contributor> Contributors { get; set; }
         DbSet<Article> Articles { get; set; }
         DbSet<Author> Authors { get; set; }
         DbSet<Tag> Tags { get; set; }
@@ -41,7 +41,7 @@ namespace BlogService.Data
         public DbSet<DigitalAsset> DigitalAssets { get; set; }        
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-
+        public DbSet<Contributor> Contributors { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Tag> Tags { get; set; }

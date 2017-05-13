@@ -7,33 +7,33 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Data.Entity;
 
-namespace BlogService.Features.Categories
+namespace BlogService.Features.Contributors
 {
-    public class GetCategoryByIdQuery
+    public class GetContributorByIdQuery
     {
-        public class GetCategoryByIdRequest : IRequest<GetCategoryByIdResponse> { 
+        public class GetContributorByIdRequest : IRequest<GetContributorByIdResponse> { 
             public int Id { get; set; }
             public Guid TenantUniqueId { get; set; }
         }
 
-        public class GetCategoryByIdResponse
+        public class GetContributorByIdResponse
         {
-            public CategoryApiModel Category { get; set; } 
+            public ContributorApiModel Contributor { get; set; } 
         }
 
-        public class GetCategoryByIdHandler : IAsyncRequestHandler<GetCategoryByIdRequest, GetCategoryByIdResponse>
+        public class GetContributorByIdHandler : IAsyncRequestHandler<GetContributorByIdRequest, GetContributorByIdResponse>
         {
-            public GetCategoryByIdHandler(BlogServiceContext context, ICache cache)
+            public GetContributorByIdHandler(BlogServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;
             }
 
-            public async Task<GetCategoryByIdResponse> Handle(GetCategoryByIdRequest request)
+            public async Task<GetContributorByIdResponse> Handle(GetContributorByIdRequest request)
             {                
-                return new GetCategoryByIdResponse()
+                return new GetContributorByIdResponse()
                 {
-                    Category = CategoryApiModel.FromCategory(await _context.Categorys
+                    Contributor = ContributorApiModel.FromContributor(await _context.Contributors
                     .Include(x => x.Tenant)				
 					.SingleAsync(x=>x.Id == request.Id &&  x.Tenant.UniqueId == request.TenantUniqueId))
                 };

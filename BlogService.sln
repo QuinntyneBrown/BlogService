@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogService.Frontend", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogService.Frontend.Admin", "src\BlogService.Frontend.Admin\BlogService.Frontend.Admin.csproj", "{F6286226-21E2-4BEB-B76D-F9E2D650E02A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogService.Tests", "src\BlogService.Tests\BlogService.Tests.csproj", "{922B8BF8-52A8-4AEF-BB41-2251ED5CAA2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{F6286226-21E2-4BEB-B76D-F9E2D650E02A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6286226-21E2-4BEB-B76D-F9E2D650E02A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6286226-21E2-4BEB-B76D-F9E2D650E02A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{922B8BF8-52A8-4AEF-BB41-2251ED5CAA2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{922B8BF8-52A8-4AEF-BB41-2251ED5CAA2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{922B8BF8-52A8-4AEF-BB41-2251ED5CAA2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{922B8BF8-52A8-4AEF-BB41-2251ED5CAA2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,5 +43,6 @@ Global
 		{A8711BC3-F343-4E44-B045-349942559795} = {5304B8C5-0198-4BC6-B0F3-89713792CDE9}
 		{FC25A15A-6CCB-44BA-99E1-C8C6DCFBFE40} = {5304B8C5-0198-4BC6-B0F3-89713792CDE9}
 		{F6286226-21E2-4BEB-B76D-F9E2D650E02A} = {5304B8C5-0198-4BC6-B0F3-89713792CDE9}
+		{922B8BF8-52A8-4AEF-BB41-2251ED5CAA2E} = {5304B8C5-0198-4BC6-B0F3-89713792CDE9}
 	EndGlobalSection
 EndGlobal

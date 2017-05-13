@@ -75,7 +75,6 @@ export class ArticleEditComponent extends HTMLElement {
     }
 
     public async saveArticle() {
-        
         const article = {
             id: this.articleId,
             authorId: this.selectElement.value,

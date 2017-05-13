@@ -1,28 +1,30 @@
 using MediatR;
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BlogService.Features.Core;
-using static BlogService.Features.Categories.AddOrUpdateCategoryCommand;
-using static BlogService.Features.Categories.GetCategoriesQuery;
-using static BlogService.Features.Categories.GetCategoryByIdQuery;
-using static BlogService.Features.Categories.RemoveCategoryCommand;
+using static BlogService.Features.Contributors.AddOrUpdateContributorCommand;
+using static BlogService.Features.Contributors.GetContributorsQuery;
+using static BlogService.Features.Contributors.GetContributorByIdQuery;
+using static BlogService.Features.Contributors.RemoveContributorCommand;
 
-namespace BlogService.Features.Categories
+namespace BlogService.Features.Contributors
 {
     [Authorize]
-    [RoutePrefix("api/category")]
-    public class CategoryController : ApiController
+    [RoutePrefix("api/contributor")]
+    public class ContributorController : ApiController
     {
-        public CategoryController(IMediator mediator)
+        public ContributorController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [Route("add")]
         [HttpPost]
-        [ResponseType(typeof(AddOrUpdateCategoryResponse))]
-        public async Task<IHttpActionResult> Add(AddOrUpdateCategoryRequest request)
+        [ResponseType(typeof(AddOrUpdateContributorResponse))]
+        public async Task<IHttpActionResult> Add(AddOrUpdateContributorRequest request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
@@ -30,8 +32,8 @@ namespace BlogService.Features.Categories
 
         [Route("update")]
         [HttpPut]
-        [ResponseType(typeof(AddOrUpdateCategoryResponse))]
-        public async Task<IHttpActionResult> Update(AddOrUpdateCategoryRequest request)
+        [ResponseType(typeof(AddOrUpdateContributorResponse))]
+        public async Task<IHttpActionResult> Update(AddOrUpdateContributorRequest request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
@@ -40,18 +42,18 @@ namespace BlogService.Features.Categories
         [Route("get")]
         [AllowAnonymous]
         [HttpGet]
-        [ResponseType(typeof(GetCategoriesResponse))]
+        [ResponseType(typeof(GetContributorsResponse))]
         public async Task<IHttpActionResult> Get()
         {
-            var request = new GetCategoriesRequest();
+            var request = new GetContributorsRequest();
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
         }
 
         [Route("getById")]
         [HttpGet]
-        [ResponseType(typeof(GetCategoryByIdResponse))]
-        public async Task<IHttpActionResult> GetById([FromUri]GetCategoryByIdRequest request)
+        [ResponseType(typeof(GetContributorByIdResponse))]
+        public async Task<IHttpActionResult> GetById([FromUri]GetContributorByIdRequest request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
@@ -59,8 +61,8 @@ namespace BlogService.Features.Categories
 
         [Route("remove")]
         [HttpDelete]
-        [ResponseType(typeof(RemoveCategoryResponse))]
-        public async Task<IHttpActionResult> Remove([FromUri]RemoveCategoryRequest request)
+        [ResponseType(typeof(RemoveContributorResponse))]
+        public async Task<IHttpActionResult> Remove([FromUri]RemoveContributorRequest request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));

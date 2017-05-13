@@ -1,5 +1,4 @@
 using BlogService.Features.Core;
-using BlogService.Security;
 using MediatR;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -61,7 +60,6 @@ namespace BlogService.Features.Authors
             return Ok(await _mediator.Send(request));
         }
 
-        protected readonly IMediator _mediator;
-
+        protected readonly IMediator _mediator; 
     }
 }

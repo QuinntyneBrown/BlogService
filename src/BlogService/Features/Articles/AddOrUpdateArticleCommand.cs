@@ -20,10 +20,11 @@ namespace BlogService.Features.Articles
 
         public class AddOrUpdateArticleHandler : IAsyncRequestHandler<AddOrUpdateArticleRequest, AddOrUpdateArticleResponse>
         {
-            public AddOrUpdateArticleHandler(IBlogServiceContext context, ICache cache)
+            public AddOrUpdateArticleHandler(IBlogServiceContext context, ICache cache, IMediator mediator)
             {
                 _context = context;
                 _cache = cache;
+                _mediator = mediator;
             }
 
             public async Task<AddOrUpdateArticleResponse> Handle(AddOrUpdateArticleRequest request)
@@ -47,6 +48,13 @@ namespace BlogService.Features.Articles
                 foreach(var tag in request.Article.Tags)
                 {
                     entity.Tags.Add(await _context.Tags.FindAsync(tag.Id));
+                }
+                
+                entity.Categories.Clear();
+
+                foreach (var category in request.Article.Categories)
+                {
+                    entity.Categories.Add(await _context.Categories.FindAsync(category.Id));
                 }
 
                 entity.AuthorId = request.Article.AuthorId;
@@ -75,8 +83,17 @@ namespace BlogService.Features.Articles
                     .CountAsync(x => x.Slug == slug
                     && x.Id != articleId)) > 0;
 
+            public async Task<string> ReplaceTagsWithDataUriAndUploadImages(string htmlContent) {
+                return await Task.FromResult(htmlContent);
+            }
+
+            public async Task<string> UploadImageFromBase64String(string base64String) {
+                return await Task.FromResult(base64String);
+            }
+
             private readonly IBlogServiceContext _context;
             private readonly ICache _cache;
+            private readonly IMediator _mediator;
         }
     }
 }

@@ -1,3 +1,5 @@
+//https://quilljs.com/docs/modules/syntax/
+
 export class EditorComponent {
     constructor(private nativeElement: HTMLElement) {
         this._quill = new Quill(nativeElement, {
@@ -5,7 +7,7 @@ export class EditorComponent {
                 toolbar: [
                     [{ header: [1, 2, 3, 4, false] }],
                     ['bold', 'italic', 'underline'],
-                    ['link']
+                    ['image','link']
                 ]
             },
             theme: 'snow'
